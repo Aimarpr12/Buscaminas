@@ -143,6 +143,7 @@ function handleRegister(event) {
             // Guarda los datos actualizados
             localStorage.setItem('users', JSON.stringify(updatedUsers));
             localStorage.setItem('activeUser', JSON.stringify(updatedUser));
+            sessionStorage.setItem('justLoggedIn', 'true');
             alert('Perfil actualizado exitosamente!');
             
             // Redirige a la página anterior o a index.html

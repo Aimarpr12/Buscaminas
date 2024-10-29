@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 });
-debugger;
+
 function ejecutaFuncionAlVolver() {
     debugger;
     const buttonLogin = document.getElementById('auth');
