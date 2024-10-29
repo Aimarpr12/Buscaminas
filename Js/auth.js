@@ -1,8 +1,9 @@
-
 const login = document.getElementById('login');
 const register = document.getElementById('register');
 const loginForm = document.querySelector('.login');
 const registerForm = document.querySelector('.register');
+debugger;
+// Muestra u oculta los formularios de inicio de sesión y registro
 login.addEventListener('click', () => {
     loginForm.style.display = 'block';
     registerForm.style.display = 'none';
@@ -12,6 +13,7 @@ register.addEventListener('click', () => {
     registerForm.style.display = 'block';
 });
 
+// Vista previa de la imagen y validación de dimensiones cuadradas
 document.querySelectorAll('input[type="file"]').forEach(input => {
     input.addEventListener('change', function (event) {
         const file = event.target.files[0];
@@ -48,69 +50,181 @@ document.querySelectorAll('input[type="file"]').forEach(input => {
     });
 });
 
+// Guardar la URL de origen
+document.addEventListener('DOMContentLoaded', () => {
+    const referrer = document.referrer;
+    if (referrer && !referrer.includes(window.location.hostname)) {
+        localStorage.setItem('redirectAfterAuth', referrer);
+    }
+debugger;
+    if(localStorage.getItem('editarPerfil')){
+        const radio = document.querySelector('.radioAuth');
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        radio.style.display = 'none';
+        const buttonRegister = document.getElementById('register');
+        buttonRegister.innerHTML = "Editar perfil";
+        const username = document.getElementById('registerUsername');
+        username.disabled = true;
+        username.value = JSON.parse(localStorage.getItem('activeUser')).username;
+        const imageContainer = document.querySelector('.image');
+        const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+
+        if (activeUser.image) {
+            imageContainer.innerHTML = `<img src="${activeUser.image}" alt="Foto de perfil actual">`;
+        } else {
+            imageContainer.innerHTML = `<img src="img/perfil.png" alt="Foto de perfil por defecto">`;
+        }
+
+        const buttonEdit = document.getElementById('register');
+        buttonEdit.innerHTML = 'Editar perfil';
+    }
+
+});
+
+// Escucha los eventos de los formularios de inicio de sesión y registro
 document.getElementById('loginForm').addEventListener('submit', handleLogin);
 document.getElementById('registerForm').addEventListener('submit', handleRegister);
 
 function handleLogin(event) {
-    event.preventDefault(); // Evita el envío del formulario
-
+    event.preventDefault();
+    debugger;
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
 
-    // Recupera los usuarios de localStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.username === username && user.password === password);
 
     if (user) {
+        localStorage.setItem('activeUser', JSON.stringify(user));
         alert('Inicio de sesión exitoso!');
-        // Aquí puedes redirigir al usuario o realizar alguna acción adicional
+        sessionStorage.setItem('justLoggedIn', 'true');
+        // Redirige a la página anterior o a index.html si no hay referrer
+        if (document.referrer) {
+            window.location.href = document.referrer;
+        } else {
+            window.location.href = 'index.html';
+        }
     } else {
         alert('Nombre de usuario o contraseña incorrectos.');
     }
 }
-
 function handleRegister(event) {
-    event.preventDefault(); // Evita el envío del formulario
+    debugger;
+    event.preventDefault();
 
     const username = document.getElementById('registerUsername').value;
     const password = document.getElementById('registerPassword').value;
     const imageInput = document.getElementById('registerImage');
     const imageFile = imageInput.files[0];
 
-    // Verifica si el nombre de usuario ya existe en localStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = users.some(user => user.username === username);
+    const isEditingProfile = JSON.parse(localStorage.getItem('activeUser'));
 
-    if (userExists) {
-        alert('El nombre de usuario ya está en uso. Por favor elige otro.');
-    } else {
+    if (isEditingProfile) {
+        // Actualización de perfil de usuario
+
+        const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+
+        // Actualiza la imagen del usuario en base64 si se sube una nueva
         const reader = new FileReader();
         reader.onload = function (e) {
-            const user = {
-                username,
-                password,
-                image: e.target.result // Almacena la imagen como base64
+            const updatedUser = {
+                username: activeUser.username, // El nombre de usuario permanece igual
+                password, // Nueva contraseña ingresada
+                image: e.target.result || activeUser.image // Nueva imagen o mantiene la existente
             };
-            users.push(user); // Agrega el nuevo usuario al array
-            localStorage.setItem('users', JSON.stringify(users));
 
-            alert('Registro exitoso!');
-            imageInput.value = '';
-            document.getElementById('registerUsername').value = '';
-            document.getElementById('registerPassword').value = '';
+            // Actualiza el usuario en el array `users`
+            const updatedUsers = users.map(user =>
+                user.username === activeUser.username ? updatedUser : user
+            );
+
+            // Guarda los datos actualizados
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+            localStorage.setItem('activeUser', JSON.stringify(updatedUser));
+            alert('Perfil actualizado exitosamente!');
+            
+            // Redirige a la página anterior o a index.html
+            if (document.referrer) {
+                window.location.href = document.referrer;
+            } else {
+                window.location.href = 'index.html';
+            }
         };
 
         if (imageFile) {
             reader.readAsDataURL(imageFile);
         } else {
-            const user = {
-                username,
+            // Si no se selecciona nueva imagen, solo actualiza la contraseña
+            const updatedUser = {
+                username: activeUser.username,
                 password,
-                image: 'Img/perfil.png' // Imagen por defecto
+                image: activeUser.image // Usa la imagen existente
             };
-            users.push(user);
-            localStorage.setItem('users', JSON.stringify(users));
-            alert('Registro exitoso!');
+
+            const updatedUsers = users.map(user =>
+                user.username === activeUser.username ? updatedUser : user
+            );
+
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+            localStorage.setItem('activeUser', JSON.stringify(updatedUser));
+            alert('Perfil actualizado exitosamente!');
+            
+            // Redirige a la página anterior o a index.html
+            if (document.referrer) {
+                window.location.href = document.referrer;
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+    } else {
+        // Registro de un nuevo usuario
+        const userExists = users.some(user => user.username === username);
+
+        if (userExists) {
+            alert('El nombre de usuario ya está en uso. Por favor elige otro.');
+        } else {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const newUser = {
+                    username,
+                    password,
+                    image: e.target.result
+                };
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('activeUser', JSON.stringify(newUser)); // Guarda el usuario recién creado como activo
+                alert('Registro exitoso!');
+
+                // Redirige a la página anterior o a index.html
+                if (document.referrer) {
+                    window.location.href = document.referrer;
+                } else {
+                    window.location.href = 'index.html';
+                }
+            };
+
+            if (imageFile) {
+                reader.readAsDataURL(imageFile);
+            } else {
+                const newUser = {
+                    username,
+                    password,
+                    image: 'Img/perfil.png' // Imagen por defecto si no se selecciona una
+                };
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('activeUser', JSON.stringify(newUser)); // Guarda el usuario recién creado como activo
+                alert('Registro exitoso!');
+
+                // Redirige a la página anterior o a index.html
+                if (document.referrer) {
+                    window.location.href = document.referrer;
+                } else {
+                    window.location.href = 'index.html';
+                }
+            }
         }
     }
 }
