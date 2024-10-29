@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/ranking.css">
+    <title>Valores Recibidos</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Valores Recibidos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tiempo Enviado (mm:ss)</th>
+                    <th>Hora</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="tablaValores">
+                <!-- Aquí se agregarán los valores -->
+            </tbody>
+        </table>
+        <button onclick="window.location.href='input.html'">Volver</button>
+        <button id="borrar" onclick="borrarDatos()">Borrar Datos</button>
+    </div>
+    <script src="Js/ranking.js"></script> <!-- Cargar el script externo -->
+</body>
+</html>

@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9ecef; /* Color de fondo suave */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff; /* Fondo blanco para el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h1 {
+    color: #333; /* Color del texto del título */
+    text-align: center; /* Centrar el texto */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Combina bordes de las celdas */
+    margin-top: 20px; /* Espacio por encima de la tabla */
+}
+
+th, td {
+    border: 1px solid #dee2e6; /* Bordes claros para las celdas */
+    padding: 12px; /* Espaciado interno en celdas */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+th {
+    background-color: #007bff; /* Color de fondo para el encabezado */
+    color: white; /* Color del texto del encabezado */
+    font-weight: bold; /* Negrita para el encabezado */
+}
+
+td {
+    background-color: #f8f9fa; /* Color de fondo suave para las celdas */
+}
+
+td:hover {
+    background-color: #e2e6ea; /* Color al pasar el mouse sobre celdas */
+}
+
+button {
+    padding: 10px 15px; /* Espaciado del botón */
+    background: #28a745; /* Color verde para el botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    margin-top: 20px; /* Espaciado por encima del botón */
+    display: block; /* Hacer que el botón ocupe toda la línea */
+    width: 100%; /* Hacer que el botón ocupe el 100% del ancho */
+}
+
+button:hover {
+    background: #218838; /* Color más oscuro al pasar el mouse */
+}
