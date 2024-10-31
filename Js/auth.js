@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (referrer && !referrer.includes(window.location.hostname)) {
         localStorage.setItem('redirectAfterAuth', referrer);
     }
-debugger;
     if(localStorage.getItem('editarPerfil')){
         const radio = document.querySelector('.radioAuth');
         loginForm.style.display = 'none';
@@ -94,11 +93,11 @@ function handleLogin(event) {
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.username === username && user.password === password);
-
+    debugger;
     if (user) {
         localStorage.setItem('activeUser', JSON.stringify(user));
         alert('Inicio de sesión exitoso!');
-        sessionStorage.setItem('justLoggedIn', 'true');
+        localStorage.setItem('justLoggedIn', 'true');
         // Redirige a la página anterior o a index.html si no hay referrer
         if (document.referrer) {
             window.location.href = document.referrer;
@@ -143,7 +142,7 @@ function handleRegister(event) {
             // Guarda los datos actualizados
             localStorage.setItem('users', JSON.stringify(updatedUsers));
             localStorage.setItem('activeUser', JSON.stringify(updatedUser));
-            sessionStorage.setItem('justLoggedIn', 'true');
+            localStorage.setItem('justLoggedIn', 'true');
             alert('Perfil actualizado exitosamente!');
             
             // Redirige a la página anterior o a index.html
