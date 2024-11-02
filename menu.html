@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<div id="header">
+    <h1>Buscaminas</h1>
+    <nav>
+        <ul class="menu">
+            <li><a href="index.html" id="index">Inicio</a></li>
+            <li><a href="#" id="auth">Iniciar sesión / Registrarse</a></li>
+            <li><a href="#" id="play">Jugar</a></li>
+            <li><a href="ranking.html" id="ranking">Ranking</a></li>
+            <li><a href="#" id="editProfile">Editar perfil</a></li>
+            <li><a href="#" id="logout">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+</div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="Css/variables.css">
-    <link rel="stylesheet" href="Css/auth.css">
-    <link rel="stylesheet" href="Css/general.css">
-</head>
 
-<body>
+
+<dialog id="credenciales">
     <div class="auth">
         <div class="radioAuth">
             <input type="radio" name="auth" id="login" checked>
@@ -37,9 +41,9 @@
                 <input type="text" name="username" id="registerUsername" placeholder="Nombre de usuario" required>
                 <input type="password" name="password" id="registerPassword" placeholder="Contraseña" required>
                 <button id="register" type="submit">Registrarse</button>
+                
             </form>
         </div>
+        <button type="button" id="cerrar" onclick="cerrarAuth()">Cancelar</button>
     </div>
-</body>
-
-</html>
+</dialog>

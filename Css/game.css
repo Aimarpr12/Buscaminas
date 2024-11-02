@@ -1,18 +1,26 @@
 body {
+  margin-top: 150px;
+}
+
+  
+  #game {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 80vh;
     margin: 0;
   }
   
+
+
   h1 {
     margin-bottom: 20px;
   }
   
   #game-board {
+    color: black;
     display: grid;
     grid-template-columns: repeat(10, 40px);
     grid-template-rows: repeat(10, 40px);
@@ -30,7 +38,10 @@ body {
     font-size: 18px;
     cursor: pointer;
     border: 1px solid #999;
+    display: flex;
   }
+
+
   
   .cell.revealed {
     background-color: #ffffff;
@@ -46,3 +57,20 @@ body {
     background-color: orange;
   }
   
+
+  #ajustesForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    border-color: var(--color-complementario-2);
+  }
+
+  #ajustesDialog{
+    background-color: var(--color-complementario-2);
+    border-radius: 10px;
+    border-color: var(--color-complementario-1);
+  }
+
+

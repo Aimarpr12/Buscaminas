@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/variables.css">
     <link rel="stylesheet" href="Css/ranking.css">
     <link rel="stylesheet" href="Css/general.css">
+    <link rel="stylesheet" href="Css/auth.css">
     <title>Valores Recibidos</title>
 </head>
 <body>
+    <div id="menu"></div>
     <div class="container">
         <h1>Valores Recibidos</h1>
         <table>
@@ -24,9 +27,9 @@
                 <!-- Aquí se agregarán los valores -->
             </tbody>
         </table>
-        <button onclick="window.location.href='index.html'">Volver</button>
         <button id="borrar" onclick="borrarDatos()">Borrar Datos</button>
     </div>
-    <script src="Js/ranking.js"></script> <!-- Cargar el script externo -->
+    <script src="Js/ranking.js"></script>
+    <script src="Js/Menu.js" type="module"></script>
 </body>
 </html>

@@ -1,7 +1,44 @@
-#logout{
-    display: none;
+body {
+    margin-top: 150px;
+  }
+  
+.rules-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    margin-top: 10%;
+    background-color: #f9f9f9;
+    border: 2px solid var(--color-complementario-2);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #333;
 }
 
-#editProfile{
-    display: none;
+.rules-container h2 {
+    color: var(--color-principal); /* Color principal */
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.rules-container h3 {
+    color: var(--color-complementario-1); /* Color complementario 1 */
+    font-size: 1.4em;
+    margin-bottom: 8px;
+}
+
+.rules-container p, .rules-container ul {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.rules-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.rules-container li {
+    margin-bottom: 8px;
 }

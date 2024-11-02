@@ -52,11 +52,14 @@ document.querySelectorAll('input[type="file"]').forEach(input => {
 
 // Guardar la URL de origen
 document.addEventListener('DOMContentLoaded', () => {
+    debugger;
+    /*
     const referrer = document.referrer;
     if (referrer && !referrer.includes(window.location.hostname)) {
         localStorage.setItem('redirectAfterAuth', referrer);
     }
     if(localStorage.getItem('editarPerfil')){
+     
         const radio = document.querySelector('.radioAuth');
         loginForm.style.display = 'none';
         registerForm.style.display = 'block';
@@ -77,9 +80,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const buttonEdit = document.getElementById('register');
         buttonEdit.innerHTML = 'Editar perfil';
-    }
+    }*/
 
 });
+
+export function auth(){
+    debugger;
+    const referrer = document.referrer;
+    if (referrer && !referrer.includes(window.location.hostname)) {
+        localStorage.setItem('redirectAfterAuth', referrer);
+    }
+    if(localStorage.getItem('editarPerfil')){
+     
+        const radio = document.querySelector('.radioAuth');
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        radio.style.display = 'none';
+        const buttonRegister = document.getElementById('register');
+        buttonRegister.innerHTML = "Editar perfil";
+        const username = document.getElementById('registerUsername');
+        username.disabled = true;
+        username.value = JSON.parse(localStorage.getItem('activeUser')).username;
+        const imageContainer = document.querySelector('.image');
+        const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+
+        if (activeUser.image) {
+            imageContainer.innerHTML = `<img src="${activeUser.image}" alt="Foto de perfil actual">`;
+        } else {
+            imageContainer.innerHTML = `<img src="img/perfil.png" alt="Foto de perfil por defecto">`;
+        }
+
+        const buttonEdit = document.getElementById('register');
+        buttonEdit.innerHTML = 'Editar perfil';
+    }else{
+        const register = document.getElementsByClassName('register');
+    }
+
+    const close = document.getElementById('cerrar');
+    close.addEventListener('click',cerrarAuth);
+}
 
 // Escucha los eventos de los formularios de inicio de sesión y registro
 document.getElementById('loginForm').addEventListener('submit', handleLogin);
@@ -98,12 +137,8 @@ function handleLogin(event) {
         localStorage.setItem('activeUser', JSON.stringify(user));
         alert('Inicio de sesión exitoso!');
         localStorage.setItem('justLoggedIn', 'true');
-        // Redirige a la página anterior o a index.html si no hay referrer
-        if (document.referrer) {
-            window.location.href = document.referrer;
-        } else {
-            window.location.href = 'index.html';
-        }
+        cerrarAuth();
+        window.location.reload();
     } else {
         alert('Nombre de usuario o contraseña incorrectos.');
     }
@@ -145,12 +180,8 @@ function handleRegister(event) {
             localStorage.setItem('justLoggedIn', 'true');
             alert('Perfil actualizado exitosamente!');
             
-            // Redirige a la página anterior o a index.html
-            if (document.referrer) {
-                window.location.href = document.referrer;
-            } else {
-                window.location.href = 'index.html';
-            }
+            cerrarAuth();
+            window.location.reload();
         };
 
         if (imageFile) {
@@ -172,11 +203,8 @@ function handleRegister(event) {
             alert('Perfil actualizado exitosamente!');
             
             // Redirige a la página anterior o a index.html
-            if (document.referrer) {
-                window.location.href = document.referrer;
-            } else {
-                window.location.href = 'index.html';
-            }
+            cerrarAuth();
+            window.location.reload();
         }
     } else {
         // Registro de un nuevo usuario
@@ -197,12 +225,8 @@ function handleRegister(event) {
                 localStorage.setItem('activeUser', JSON.stringify(newUser)); // Guarda el usuario recién creado como activo
                 alert('Registro exitoso!');
 
-                // Redirige a la página anterior o a index.html
-                if (document.referrer) {
-                    window.location.href = document.referrer;
-                } else {
-                    window.location.href = 'index.html';
-                }
+                cerrarAuth();
+                window.location.reload();
             };
 
             if (imageFile) {
@@ -217,14 +241,16 @@ function handleRegister(event) {
                 localStorage.setItem('users', JSON.stringify(users));
                 localStorage.setItem('activeUser', JSON.stringify(newUser)); // Guarda el usuario recién creado como activo
                 alert('Registro exitoso!');
-
-                // Redirige a la página anterior o a index.html
-                if (document.referrer) {
-                    window.location.href = document.referrer;
-                } else {
-                    window.location.href = 'index.html';
-                }
+                cerrarAuth();
+                window.location.reload();
             }
         }
     }
 }
+
+function cerrarAuth() {
+    const credencialesDialog = document.getElementById('credenciales');
+    credencialesDialog.close(); // Cierra el diálogo
+}
+
+

@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/variables.css">
     <link rel="stylesheet" href="Css/general.css">
-    <link rel="stylesheet" href="Css/general.css">
+    <link rel="stylesheet" href="Css/index.css">
+    <link rel="stylesheet" href="Css/auth.css">
     <title>Buscaminas</title>
 </head>
 <body>
-    <h1>Buscaminas</h1>
-    <button id="auth" onclick="location.href='auth.html'">Iniciar sesión / Registrarse</button>
-    <button id="play" onclick="location.href='game.html'">Jugar</button>
-    <button id="ranking" onclick="location.href='ranking.html'">Ranking</button>
-    <button id="logout">Cerrar sesión</button>
-    <button id="editProfile">Editar perfil</button>
-
-    <script src="Js/index.js" type="module"></script>
+    <div id="menu"></div>
+    <div class="rules-container">
+        <h2>Reglas del Juego - Buscaminas</h2>
+        <p>El objetivo del juego es descubrir todas las celdas sin minas en el tablero. Si haces clic en una celda con una mina, ¡pierdes!</p>
+        <h3>Cómo jugar:</h3>
+        <ul>
+            <li>Haz clic en una celda para descubrirla. Si es un número, indica cuántas minas hay en las celdas adyacentes.</li>
+            <li>Usa el botón derecho para marcar una celda que creas que contiene una mina.</li>
+            <li>Gana el juego descubriendo todas las celdas sin minas.</li>
+            <li>Ten en cuenta que, si te equivocas y destapas una mina, ¡perderás la partida!</li>
+        </ul>
+        <p>Buena suerte y disfruta del desafío del Buscaminas.</p>
+    </div>
+    
+    <script src="Js/index.js"></script>
+    <script src="Js/Menu.js" type="module"></script>
 </body>
 </html>

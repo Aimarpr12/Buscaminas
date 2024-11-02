@@ -1,21 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="Css/variables.css">
     <link rel="stylesheet" href="Css/game.css">
     <link rel="stylesheet" href="Css/general.css">
+    <link rel="stylesheet" href="Css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
+
 <body>
-    <div>
-      <span id="total-mines">Minas: 20</span> | 
-      <span id="flags-placed">Banderas: 0</span> | 
-      <span id="timer">Tiempo: 0s</span>
+    <div id="menu"></div>
+    <div id="game">
+        <div>
+            <span id="ajustes"><i class="fas fa-cog"></i></span> |
+            <span id="total-mines">Minas: 20</span> |
+            <span id="flags-placed">Banderas: 0</span> |
+            <span id="timer">Tiempo: 0s</span>
+        </div>
+        <div id="game-board"></div>
+        <button id="reset-button">Reiniciar</button>
     </div>
-    <div id="game-board"></div>
-    <button id="reset-button">Reiniciar</button>
-    <script type="module" src="Js/game.js"></script>
-    
+
+    <dialog id="ajustesDialog">
+        <h2>Ajustes del Buscaminas</h2>
+        <form id="ajustesForm">
+            <label for="rows">Filas: <span id="rowsValue">10</span></label>
+            <input type="range" id="rows" name="rows" min="5" max="20" value="10">
+
+            <label for="cols">Columnas: <span id="colsValue">10</span></label>
+            <input type="range" id="cols" name="cols" min="5" max="20" value="10">
+
+            <label for="numMines">Número de Minas: <span id="minesValue">20</span></label>
+            <input type="range" id="numMines" name="numMines" min="5" max="50" value="20">
+
+            <div>
+                <button type="button" onclick="guardarAjustes()">Aceptar</button>
+                <button type="button" onclick="cerrarAjustes()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="Js/game.js" type="module"></script>
+    <script src="Js/Menu.js" type="module"></script>
+    <script src="Js/ajustesBuscaminas.js"></script>
+
 </body>
+
 </html>
