@@ -10,6 +10,10 @@ function mostrarDatos() {
     // Limpiar el contenido de la tabla
     tablaValores.innerHTML = "";
 
+    // Ordenar gameHistory de menor a mayor tiempo
+    gameHistory.sort((a, b) => a.time - b.time);
+
+    // Iterar sobre gameHistory ya ordenado
     gameHistory.forEach(gameData => {
         // Buscar la foto de perfil del usuario
         const user = users.find(user => user.username === gameData.username);

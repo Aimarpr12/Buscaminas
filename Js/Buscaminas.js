@@ -30,6 +30,8 @@ export default class Buscaminas {
 
     resetGame() {
         console.clear();
+        incrementarIntento();
+        mostrarIntentos();
         this.initGame();
     }
 
@@ -85,3 +87,43 @@ export default class Buscaminas {
         if (allCellsRevealed) this.gameOver(true);
     }
 }
+
+
+// Inicializar o recuperar el contador de intentos
+function iniciarContadorIntentos() {
+    // Verifica si hay un valor almacenado en sessionStorage
+    if (sessionStorage.getItem('intentos')) {
+        // Convierte el valor almacenado en un número
+        return parseInt(sessionStorage.getItem('intentos'), 10);
+    } else {
+        // Si no hay un valor guardado, inicia el contador en 0
+        sessionStorage.setItem('intentos', 0);
+        return 0;
+    }
+}
+
+// Incrementa el contador de intentos y lo guarda en sessionStorage
+function incrementarIntento() {
+    let intentos = iniciarContadorIntentos();  // Obtiene el número actual de intentos
+    intentos += 1;  // Incrementa el contador
+    sessionStorage.setItem('intentos', intentos);  // Guarda el nuevo valor en sessionStorage
+    console.log(`Intento número: ${intentos}`);
+}
+
+// Función para inicializar el contador de intentos en el HTML
+function mostrarIntentos() {
+    // Obtiene el valor actual de intentos desde sessionStorage
+    let intentos = sessionStorage.getItem('intentos') || 0;
+    // Actualiza el contenido del elemento HTML con el valor de intentos
+    document.getElementById('intentos').textContent = `Intentos: ${intentos}`;
+}
+
+function reiniciarIntentos() {
+    sessionStorage.setItem('intentos', 0); // Resetea los intentos en sessionStorage
+    // Obtiene el valor actual de intentos desde sessionStorage
+    let intentos = sessionStorage.getItem('intentos') || 0;
+    // Actualiza el contenido del elemento HTML con el valor de intentos
+    document.getElementById('intentos').textContent = `Intentos: ${intentos}`;
+}
+
+window.onload = reiniciarIntentos;
