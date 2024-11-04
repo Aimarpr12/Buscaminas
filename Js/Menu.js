@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function botonJugar() {
-    debugger;
     const buttonJugar = document.getElementById('play');
     buttonJugar.addEventListener('click', (event) => {
         event.preventDefault();
-        debugger;
         if (localStorage.getItem('justLoggedIn')) {
             window.location.href = 'game.html';
         } else {
             alert('Debes iniciar sesión para jugar al buscaminas');
+            const credencialesDialog = document.getElementById('credenciales');
+            credencialesDialog.showModal(); // Abre el diálogo en modo modal
         }
     });
 }
@@ -80,7 +80,6 @@ function ejecutaFuncionAlVolver() {
 
         // Configurar el botón de cerrar sesión
         buttonLogout.addEventListener('click', () => {
-            debugger;
             buttonLogin.innerHTML = "Iniciar sesión / Registrarse";
             buttonLogin.disabled = false;
             buttonLogout.style.display = 'none';
@@ -91,7 +90,6 @@ function ejecutaFuncionAlVolver() {
         const credencialesDialog = document.getElementById('credenciales');
         // Configurar el botón de editar perfil
         buttonEditProfile.addEventListener('click', async() => {
-            debugger;
             localStorage.setItem('editarPerfil', 'true');
             credencialesDialog.showModal(); // Abre el diálogo en modo modal
             try {
@@ -106,11 +104,9 @@ function ejecutaFuncionAlVolver() {
 }
 
 function botonAuth() {
-    debugger;
     const authBoton = document.getElementById('auth');
     const credencialesDialog = document.getElementById('credenciales');
     authBoton.addEventListener('click', async () => {
-        debugger;
         credencialesDialog.showModal(); // Abre el diálogo en modo modal
         try {
             // Importa dinámicamente el módulo auth.js
@@ -124,7 +120,6 @@ function botonAuth() {
 }
 
 function cerrarAuth() {
-    debugger;
     const credencialesDialog = document.getElementById('credenciales');
     credencialesDialog.close(); // Cierra el diálogo
 }

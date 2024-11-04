@@ -16,6 +16,7 @@
 
 <dialog id="credenciales">
     <div class="auth">
+        <h2>Inicio de sesión / Registro</h2>
         <div class="radioAuth">
             <input type="radio" name="auth" id="login" checked>
             <label for="login">Iniciar sesión</label>
@@ -24,26 +25,34 @@
         </div>
         <div class="login">
             <form id="loginForm">
-                <input type="text" name="username" id="loginUsername" placeholder="Nombre de usuario" required>
-                <input type="password" name="password" id="loginPassword" placeholder="Contraseña" required>
-                <button type="submit">Iniciar sesión</button>
+                <label>Usuario</label>
+                <input type="text" name="username" id="loginUsername" required>
+                <label>Contraseña</label>
+                <input type="password" name="password" id="loginPassword" required>
+                <div id="button">
+                    <button type="submit">Iniciar sesión</button>
+                    <button type="button" id="cerrarLogin" onclick="cerrarAuth()">Cancelar</button>
+                </div>
             </form>
         </div>
 
         <div class="register">
             <form id="registerForm">
                 <label for="imagen">Foto de perfil</label>
-                <input type="file" accept="image/*" capture="user" id="registerImage">
-                <!-- Vista previa de la imagen al subirla -->
-                <div class="image">
-                    <img src="Img/perfil.png" alt="Foto de perfil por defecto">
+                <input type="file" accept="image/*" capture="user" id="registerImage" style="display: none;">
+                <div class="image" onclick="document.getElementById('registerImage').click()">
+                    <img src="Img/perfil.png" alt="Foto de perfil por defecto" id="profilePreview">
                 </div>
-                <input type="text" name="username" id="registerUsername" placeholder="Nombre de usuario" required>
-                <input type="password" name="password" id="registerPassword" placeholder="Contraseña" required>
-                <button id="register" type="submit">Registrarse</button>
+                <label>Usuario</label>
+                <input type="text" name="username" id="registerUsername" required>
+                <label>Contraseña</label>
+                <input type="password" name="password" id="registerPassword" required>
+                <div id="button">
+                    <button id="registerButton" type="submit">Registrarse</button>
+                    <button type="button" id="cerrarRegister" onclick="cerrarAuth()">Cancelar</button>
+                </div>
                 
             </form>
         </div>
-        <button type="button" id="cerrar" onclick="cerrarAuth()">Cancelar</button>
     </div>
 </dialog>

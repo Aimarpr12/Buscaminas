@@ -16,7 +16,7 @@
 <body>
     <div id="menu"></div>
     <div id="game">
-        <div>
+        <div id="info">
             <span id="ajustes"><i class="fas fa-cog"></i></span> |
             <span id="total-mines">Minas: 20</span> |
             <span id="flags-placed">Banderas: 0</span> |
@@ -31,13 +31,10 @@
         <h2>Ajustes del Buscaminas</h2>
         <form id="ajustesForm">
             <label for="rows">Filas: <span id="rowsValue">10</span></label>
-            <input type="range" id="rows" name="rows" min="5" max="20" value="10">
-
-            <label for="cols">Columnas: <span id="colsValue">10</span></label>
-            <input type="range" id="cols" name="cols" min="5" max="20" value="10">
+            <input type="range" id="rows" name="rows" min="5" max="15" value="10">
 
             <label for="numMines">Número de Minas: <span id="minesValue">20</span></label>
-            <input type="range" id="numMines" name="numMines" min="5" max="50" value="20">
+            <input type="range" id="numMines" name="numMines" min="5" max="30" value="20">
 
             <div>
                 <button type="button" onclick="guardarAjustes()">Aceptar</button>

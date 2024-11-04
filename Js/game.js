@@ -1,7 +1,6 @@
 import Buscaminas from './Buscaminas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    debugger;
     if(!localStorage.getItem('justLoggedIn')){
         alert('Debes iniciar sesión para jugar al buscaminas');
         window.location.href = 'index.html';
