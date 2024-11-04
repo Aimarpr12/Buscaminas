@@ -2,7 +2,6 @@ const login = document.getElementById('login');
 const register = document.getElementById('register');
 const loginForm = document.querySelector('.login');
 const registerForm = document.querySelector('.register');
-debugger;
 // Muestra u oculta los formularios de inicio de sesión y registro
 login.addEventListener('click', () => {
     loginForm.style.display = 'block';
@@ -52,7 +51,6 @@ document.querySelectorAll('input[type="file"]').forEach(input => {
 
 // Guardar la URL de origen
 document.addEventListener('DOMContentLoaded', () => {
-    debugger;
     /*
     const referrer = document.referrer;
     if (referrer && !referrer.includes(window.location.hostname)) {
@@ -96,7 +94,7 @@ export function auth(){
         loginForm.style.display = 'none';
         registerForm.style.display = 'block';
         radio.style.display = 'none';
-        const buttonRegister = document.getElementById('register');
+        const buttonRegister = document.getElementById('registerButton');
         buttonRegister.innerHTML = "Editar perfil";
         const username = document.getElementById('registerUsername');
         username.disabled = true;
@@ -116,8 +114,10 @@ export function auth(){
         const register = document.getElementsByClassName('register');
     }
 
-    const close = document.getElementById('cerrar');
-    close.addEventListener('click',cerrarAuth);
+    const cerrarLogin = document.getElementById('cerrarLogin');
+    cerrarLogin.addEventListener('click',cerrarAuth);
+    const cerrarRegister = document.getElementById('cerrarRegister');
+    cerrarRegister.addEventListener('click',cerrarAuth);
 }
 
 // Escucha los eventos de los formularios de inicio de sesión y registro
@@ -126,13 +126,11 @@ document.getElementById('registerForm').addEventListener('submit', handleRegiste
 
 function handleLogin(event) {
     event.preventDefault();
-    debugger;
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.username === username && user.password === password);
-    debugger;
     if (user) {
         localStorage.setItem('activeUser', JSON.stringify(user));
         alert('Inicio de sesión exitoso!');
@@ -144,7 +142,6 @@ function handleLogin(event) {
     }
 }
 function handleRegister(event) {
-    debugger;
     event.preventDefault();
 
     const username = document.getElementById('registerUsername').value;
@@ -157,54 +154,24 @@ function handleRegister(event) {
 
     if (isEditingProfile) {
         // Actualización de perfil de usuario
-
         const activeUser = JSON.parse(localStorage.getItem('activeUser'));
 
-        // Actualiza la imagen del usuario en base64 si se sube una nueva
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const updatedUser = {
-                username: activeUser.username, // El nombre de usuario permanece igual
-                password, // Nueva contraseña ingresada
-                image: e.target.result || activeUser.image // Nueva imagen o mantiene la existente
-            };
-
-            // Actualiza el usuario en el array `users`
-            const updatedUsers = users.map(user =>
-                user.username === activeUser.username ? updatedUser : user
-            );
-
-            // Guarda los datos actualizados
-            localStorage.setItem('users', JSON.stringify(updatedUsers));
-            localStorage.setItem('activeUser', JSON.stringify(updatedUser));
-            localStorage.setItem('justLoggedIn', 'true');
-            alert('Perfil actualizado exitosamente!');
-            
-            cerrarAuth();
-            window.location.reload();
-        };
-
         if (imageFile) {
-            reader.readAsDataURL(imageFile);
+            resizeImage(imageFile, (resizedImage) => {
+                const updatedUser = {
+                    username: activeUser.username,
+                    password,
+                    image: resizedImage || activeUser.image
+                };
+                updateUserInLocalStorage(updatedUser, users, activeUser.username);
+            });
         } else {
-            // Si no se selecciona nueva imagen, solo actualiza la contraseña
             const updatedUser = {
                 username: activeUser.username,
                 password,
-                image: activeUser.image // Usa la imagen existente
+                image: activeUser.image
             };
-
-            const updatedUsers = users.map(user =>
-                user.username === activeUser.username ? updatedUser : user
-            );
-
-            localStorage.setItem('users', JSON.stringify(updatedUsers));
-            localStorage.setItem('activeUser', JSON.stringify(updatedUser));
-            alert('Perfil actualizado exitosamente!');
-            
-            // Redirige a la página anterior o a index.html
-            cerrarAuth();
-            window.location.reload();
+            updateUserInLocalStorage(updatedUser, users, activeUser.username);
         }
     } else {
         // Registro de un nuevo usuario
@@ -213,37 +180,89 @@ function handleRegister(event) {
         if (userExists) {
             alert('El nombre de usuario ya está en uso. Por favor elige otro.');
         } else {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const newUser = {
-                    username,
-                    password,
-                    image: e.target.result
-                };
-                users.push(newUser);
-                localStorage.setItem('users', JSON.stringify(users));
-                localStorage.setItem('activeUser', JSON.stringify(newUser)); // Guarda el usuario recién creado como activo
-                alert('Registro exitoso!');
-
-                cerrarAuth();
-                window.location.reload();
-            };
-
             if (imageFile) {
-                reader.readAsDataURL(imageFile);
+                resizeImage(imageFile, (resizedImage) => {
+                    const newUser = {
+                        username,
+                        password,
+                        image: resizedImage
+                    };
+                    saveNewUser(newUser, users);
+                });
             } else {
                 const newUser = {
                     username,
                     password,
-                    image: 'Img/perfil.png' // Imagen por defecto si no se selecciona una
+                    image: 'Img/perfil.png'
                 };
-                users.push(newUser);
-                localStorage.setItem('users', JSON.stringify(users));
-                localStorage.setItem('activeUser', JSON.stringify(newUser)); // Guarda el usuario recién creado como activo
-                alert('Registro exitoso!');
-                cerrarAuth();
-                window.location.reload();
+                saveNewUser(newUser, users);
             }
+        }
+    }
+}
+
+// Función para redimensionar la imagen antes de guardarla
+function resizeImage(file, callback) {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 100;
+        const MAX_HEIGHT = 100;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+            if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+            }
+        } else {
+            if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+            }
+        }
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        callback(canvas.toDataURL('image/png'));
+    };
+}
+
+// Función para guardar un nuevo usuario en localStorage
+function saveNewUser(newUser, users) {
+    try {
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('activeUser', JSON.stringify(newUser));
+        alert('Registro exitoso!');
+        cerrarAuth();
+        window.location.reload();
+    } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+            alert('Espacio insuficiente en localStorage. Intenta eliminar algunos datos.');
+        }
+    }
+}
+
+// Función para actualizar un usuario existente en localStorage
+function updateUserInLocalStorage(updatedUser, users, username) {
+    try {
+        const updatedUsers = users.map(user =>
+            user.username === username ? updatedUser : user
+        );
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+        localStorage.setItem('activeUser', JSON.stringify(updatedUser));
+        alert('Perfil actualizado exitosamente!');
+        cerrarAuth();
+        window.location.reload();
+    } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+            alert('Espacio insuficiente en localStorage. Intenta eliminar algunos datos.');
         }
     }
 }
@@ -252,5 +271,4 @@ function cerrarAuth() {
     const credencialesDialog = document.getElementById('credenciales');
     credencialesDialog.close(); // Cierra el diálogo
 }
-
 

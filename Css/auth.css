@@ -11,9 +11,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
-    border: 2px solid #ccc;
+    margin: 10px auto;
+    border: 2px solid var(--color-complementario-1);
 }
+
 
 .image img {
     width: 100%;
@@ -25,4 +26,62 @@
     color: red;
     font-size: 0.9em;
     margin-top: 5px;
+}
+
+#button{
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    justify-content: center;
+}
+
+#button button{
+    margin: 0 10px;
+}   
+
+.auth h2{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.radioAuth{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.radioAuth label{
+    margin: 0 10px 0 0;
+}
+
+#loginForm{
+    display: flex;
+    flex-direction: column;
+}
+
+#loginForm input{
+    margin: 5px 0;
+}
+
+#loginForm label{
+    font-weight: bold;
+}
+
+#credenciales{
+    border-color: var(--color-complementario-2);
+    border-radius: 10px;
+}
+
+#registerForm{
+    display: flex;
+    flex-direction: column;
+}
+
+#registerForm input{
+    margin: 5px 0;
+}
+
+#registerForm label{
+    font-weight: bold;
 }

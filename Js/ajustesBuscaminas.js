@@ -11,23 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const numMinesInput = document.getElementById('numMines');
 
     const rowsValue = document.getElementById('rowsValue');
-    const colsValue = document.getElementById('colsValue');
     const minesValue = document.getElementById('minesValue');
 
     // Actualiza el texto junto a cada barra de selección al cambiar el valor
     rowsInput.addEventListener('input', () => rowsValue.textContent = rowsInput.value);
-    colsInput.addEventListener('input', () => colsValue.textContent = colsInput.value);
     numMinesInput.addEventListener('input', () => minesValue.textContent = numMinesInput.value);
 });
 
 function guardarAjustes() {
     const rows = document.getElementById('rows').value;
-    const cols = document.getElementById('cols').value;
     const numMines = document.getElementById('numMines').value;
 
     // Guardar los ajustes en localStorage
     localStorage.setItem('gameRows', rows);
-    localStorage.setItem('gameCols', cols);
     localStorage.setItem('gameMines', numMines);
 
     cerrarAjustes(); // Cierra el diálogo después de guardar
