@@ -83,7 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export function auth(){
-    debugger;
+    const menu = document.getElementById('menuNav');
+    menu.classList.remove('mostrar');
+    menu.classList.add('hidden');
     const referrer = document.referrer;
     if (referrer && !referrer.includes(window.location.hostname)) {
         localStorage.setItem('redirectAfterAuth', referrer);
@@ -131,7 +133,10 @@ function handleLogin(event) {
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.username === username && user.password === password);
+
+
     if (user) {
+        debugger;
         localStorage.setItem('activeUser', JSON.stringify(user));
         alert('Inicio de sesión exitoso!');
         localStorage.setItem('justLoggedIn', 'true');
@@ -155,7 +160,8 @@ function handleRegister(event) {
     if (isEditingProfile) {
         // Actualización de perfil de usuario
         const activeUser = JSON.parse(localStorage.getItem('activeUser'));
-
+        //Lo hemos comentado para usar un swicht case 
+        /*
         if (imageFile) {
             resizeImage(imageFile, (resizedImage) => {
                 const updatedUser = {
@@ -172,7 +178,27 @@ function handleRegister(event) {
                 image: activeUser.image
             };
             updateUserInLocalStorage(updatedUser, users, activeUser.username);
-        }
+        }*/
+        switch (Boolean(imageFile)) {
+            case true:
+                resizeImage(imageFile, (resizedImage) => {
+                    const updatedUser = {
+                        username: activeUser.username,
+                        password,
+                        image: resizedImage || activeUser.image
+                    };
+                    updateUserInLocalStorage(updatedUser, users, activeUser.username);
+                });
+                break;
+            case false:
+                const updatedUser = {
+                    username: activeUser.username,
+                    password,
+                    image: activeUser.image
+                };
+                updateUserInLocalStorage(updatedUser, users, activeUser.username);
+                break;
+        }    
     } else {
         // Registro de un nuevo usuario
         const userExists = users.some(user => user.username === username);

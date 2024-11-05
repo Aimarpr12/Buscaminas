@@ -31,6 +31,7 @@ function anadirMenu(url, elementId) {
             inicarJs();
             botonJugar();
             botonAuth();
+            botonMenuMovil();
         })
         .catch(error => {
             console.error('Error:', error);
@@ -122,4 +123,19 @@ function botonAuth() {
 function cerrarAuth() {
     const credencialesDialog = document.getElementById('credenciales');
     credencialesDialog.close(); // Cierra el diálogo
+}
+
+function botonMenuMovil() {
+    const menuMovil = document.getElementById('menu-icon');
+    const menu = document.getElementById('menuNav');
+    menuMovil.addEventListener('click', () => {
+        if(menu.classList.contains('mostrar')){
+            menu.classList.remove('mostrar');
+            menu.classList.add('hidden');
+        }else{
+            menu.classList.add('mostrar');
+            menu.classList.remove('hidden');
+        }
+
+    });
 }
