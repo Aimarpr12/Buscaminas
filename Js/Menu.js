@@ -1,8 +1,8 @@
 import { logout } from './metodosComunes.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    anadirSeccion('menu.html', 'menu');   
-    anadirSeccion('footer.html', 'footer');
+    anadirSeccion('menu.html', 'menu');  
+    anadirSeccion('footer.html', 'footer'); 
 });
 
 function botonJugar() {
@@ -18,7 +18,6 @@ function botonJugar() {
         }
     });
 }
-
 
 function anadirSeccion(url, elementId) {
     fetch(url)
