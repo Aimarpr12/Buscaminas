@@ -64,7 +64,7 @@ nav {
 }
 
 .menu li a:hover:not(.active) {
-    background-color: var(--color-complementario-2); /* Color de fondo al hacer hover en enlaces inactivos */
+    background-color: var(--color-complementario-1); /* Color de fondo al hacer hover en enlaces inactivos */
 }
 
 
@@ -73,6 +73,18 @@ nav {
     color: gray;
     cursor: default;
     text-decoration: none;
+}
+
+#footer{
+    background-color: var(--color-complementario-2);
+    position: fixed;
+    margin-top: 33%;
+    left: 0;
+    height: 120px;
+    width: 100%;
+    color: white;
+    padding: 10px;
+    z-index: 1000;
 }
 
 #header{

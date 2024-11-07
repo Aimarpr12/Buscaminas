@@ -13,8 +13,11 @@ function mostrarDatos() {
     // Ordenar gameHistory de menor a mayor tiempo
     gameHistory.sort((a, b) => a.time - b.time);
 
-    // Iterar sobre gameHistory ya ordenado
-    gameHistory.forEach(gameData => {
+    // Tomar solo los primeros 10 elementos de gameHistory
+    const top10 = gameHistory.slice(0, 10);
+
+    // Iterar sobre los primeros 10 elementos de gameHistory ya ordenado
+    top10.forEach(gameData => {
         // Buscar la foto de perfil del usuario
         const user = users.find(user => user.username === gameData.username);
         const userImage = user ? user.image : "Img/default.png"; // Imagen por defecto si no se encuentra
