@@ -1,7 +1,8 @@
 import { logout } from './metodosComunes.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    anadirMenu('menu.html', 'menu');   
+    anadirSeccion('menu.html', 'menu');   
+    anadirSeccion('footer.html', 'footer');
 });
 
 function botonJugar() {
@@ -18,7 +19,8 @@ function botonJugar() {
     });
 }
 
-function anadirMenu(url, elementId) {
+
+function anadirSeccion(url, elementId) {
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -28,10 +30,12 @@ function anadirMenu(url, elementId) {
         })
         .then(htmlContent => {
             document.getElementById(elementId).innerHTML = htmlContent;
-            inicarJs();
-            botonJugar();
-            botonAuth();
-            botonMenuMovil();
+            if(elementId === 'menu'){
+                inicarJs();
+                botonJugar();
+                botonAuth();
+                botonMenuMovil();
+            }
         })
         .catch(error => {
             console.error('Error:', error);
