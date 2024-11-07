@@ -3,7 +3,9 @@ body {
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
+    min-height: 80vh;
     color: white;
+    margin: 0;
     margin-top: 150px;
 }
 
@@ -54,7 +56,6 @@ input {
     justify-content: space-around;
     width: 100%;
 }
-
 /* Icono de hamburguesa (oculto en pantallas grandes) */
 #menu-icon {
     margin-top: 25px;
@@ -98,12 +99,82 @@ input {
     cursor: not-allowed; 
 }
 
+#footer{
+    position: fixed;
+    bottom: 0;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.footer {
+
+    display: flex;
+    background-color: var(--color-complementario-2);
+    color: #fff;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-left p {
+    margin: 0;
+}
+
+.footer-left p:nth-child(2) {
+    text-align: right;
+}
+
+.footer-link {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-image {
+    width: 120px;
+    height: auto;
+}
+
+
+
 @media (max-width: 768px) {
+
+    #menu-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+    }
+
     #menu-icon {
         display: block;
         justify-content: center;
         z-index: 2; /* Asegura que el icono esté siempre por encima */
         align-items: center;
+    }
+
+    #title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0; /* Elimina cualquier margen adicional */
+        text-align: center; /* Asegura que el texto esté centrado */
+        width: 100%; /* Asegura que el título ocupe todo el ancho */
     }
 
     #menu-icon i{
