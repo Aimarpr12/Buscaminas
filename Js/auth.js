@@ -134,7 +134,7 @@ function handleLogin(event) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.username === username && user.password === password);
 
-
+    debugger;
     if (user) {
         debugger;
         localStorage.setItem('activeUser', JSON.stringify(user));
@@ -294,6 +294,7 @@ function updateUserInLocalStorage(updatedUser, users, username) {
 }
 
 function cerrarAuth() {
+    debugger;
     const credencialesDialog = document.getElementById('credenciales');
     credencialesDialog.close(); // Cierra el diálogo
 }
