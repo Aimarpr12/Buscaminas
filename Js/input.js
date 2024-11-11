@@ -1,4 +1,4 @@
-document.getElementById('enviar').addEventListener('click', function() {
+document.getElementById('enviar').addEventListener('click', function () {
     // Obtener el valor del input
     const valor = document.getElementById('valor').value;
 

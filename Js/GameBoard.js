@@ -54,7 +54,7 @@ export default class GameBoard {
   getAdjacentCells(row, col) {
     const directions = [
       [-1, -1], [-1, 0], [-1, 1],
-      [0, -1],          [0, 1],
+      [0, -1], [0, 1],
       [1, -1], [1, 0], [1, 1]
     ];
     return directions

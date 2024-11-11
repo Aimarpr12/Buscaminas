@@ -1,4 +1,4 @@
-.register{
+.register {
     display: none;
 }
 
@@ -27,60 +27,60 @@
     margin-top: 5px;
 }
 
-#button{
+#button {
     display: flex;
     flex-direction: row;
     padding-top: 10px;
     justify-content: center;
 }
 
-#button button{
+#button button {
     margin: 0 10px;
-}   
+}
 
-.auth h2{
+.auth h2 {
     text-align: center;
     margin-top: 10px;
 }
 
-.radioAuth{
+.radioAuth {
     display: flex;
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
-.radioAuth label{
+.radioAuth label {
     margin: 0 10px 0 0;
 }
 
-#loginForm{
+#loginForm {
     display: flex;
     flex-direction: column;
 }
 
-#loginForm input{
+#loginForm input {
     margin: 5px 0;
 }
 
-#loginForm label{
+#loginForm label {
     font-weight: bold;
 }
 
-#credenciales{
+#credenciales {
     border-color: var(--color-complementario-2);
     border-radius: 10px;
 }
 
-#registerForm{
+#registerForm {
     display: flex;
     flex-direction: column;
 }
 
-#registerForm input{
+#registerForm input {
     margin: 5px 0;
 }
 
-#registerForm label{
+#registerForm label {
     font-weight: bold;
 }

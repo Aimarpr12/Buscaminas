@@ -12,19 +12,22 @@
 }
 
 .rules-container h2 {
-    color: var(--color-principal); /* Color principal */
+    color: var(--color-principal);
+    /* Color principal */
     text-align: center;
     font-size: 1.8em;
     margin-bottom: 10px;
 }
 
 .rules-container h3 {
-    color: var(--color-complementario-1); /* Color complementario 1 */
+    color: var(--color-complementario-1);
+    /* Color complementario 1 */
     font-size: 1.4em;
     margin-bottom: 8px;
 }
 
-.rules-container p, .rules-container ul {
+.rules-container p,
+.rules-container ul {
     font-size: 1.1em;
     line-height: 1.6;
     margin-bottom: 15px;

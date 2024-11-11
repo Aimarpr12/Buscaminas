@@ -1,8 +1,8 @@
 import { logout } from './metodosComunes.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    anadirSeccion('menu.html', 'menu');  
-    anadirSeccion('footer.html', 'footer'); 
+    anadirSeccion('menu.html', 'menu');
+    anadirSeccion('footer.html', 'footer');
 });
 
 function botonJugar() {
@@ -29,7 +29,7 @@ function anadirSeccion(url, elementId) {
         })
         .then(htmlContent => {
             document.getElementById(elementId).innerHTML = htmlContent;
-            if(elementId === 'menu'){
+            if (elementId === 'menu') {
                 inicarJs();
                 botonJugar();
                 botonAuth();
@@ -58,12 +58,12 @@ function inicarJs() {
         ejecutaFuncionAlVolver();
         buttonEditProfile.style.display = 'block';
         buttonLogout.style.display = 'block';
-    }else{
+    } else {
         const buttonLogin = document.getElementById('auth');
         buttonLogin.innerHTML = "Iniciar sesión / Registrarse";
         buttonEditProfile.style.display = 'none';
         buttonLogout.style.display = 'none';
-        
+
 
     }
 }
@@ -93,7 +93,7 @@ function ejecutaFuncionAlVolver() {
 
         const credencialesDialog = document.getElementById('credenciales');
         // Configurar el botón de editar perfil
-        buttonEditProfile.addEventListener('click', async() => {
+        buttonEditProfile.addEventListener('click', async () => {
             localStorage.setItem('editarPerfil', 'true');
             credencialesDialog.showModal(); // Abre el diálogo en modo modal
             try {
@@ -132,10 +132,10 @@ function botonMenuMovil() {
     const menuMovil = document.getElementById('menu-icon');
     const menu = document.getElementById('menuNav');
     menuMovil.addEventListener('click', () => {
-        if(menu.classList.contains('mostrar')){
+        if (menu.classList.contains('mostrar')) {
             menu.classList.remove('mostrar');
             menu.classList.add('hidden');
-        }else{
+        } else {
             menu.classList.add('mostrar');
             menu.classList.remove('hidden');
         }

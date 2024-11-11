@@ -36,7 +36,7 @@ function mostrarDatos() {
             <td>${gameData.timeOfDay}</td>
             <td>${gameData.date}</td>
         `;
-        
+
         // Agregar la fila a la tabla
         tablaValores.appendChild(fila);
     });

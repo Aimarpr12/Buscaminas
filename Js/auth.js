@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-export function auth(){
+export function auth() {
     const menu = document.getElementById('menuNav');
     menu.classList.remove('mostrar');
     menu.classList.add('hidden');
@@ -90,8 +90,8 @@ export function auth(){
     if (referrer && !referrer.includes(window.location.hostname)) {
         localStorage.setItem('redirectAfterAuth', referrer);
     }
-    if(localStorage.getItem('editarPerfil')){
-     
+    if (localStorage.getItem('editarPerfil')) {
+
         const radio = document.querySelector('.radioAuth');
         loginForm.style.display = 'none';
         registerForm.style.display = 'block';
@@ -112,14 +112,14 @@ export function auth(){
 
         const buttonEdit = document.getElementById('register');
         buttonEdit.innerHTML = 'Editar perfil';
-    }else{
+    } else {
         const register = document.getElementsByClassName('register');
     }
 
     const cerrarLogin = document.getElementById('cerrarLogin');
-    cerrarLogin.addEventListener('click',cerrarAuth);
+    cerrarLogin.addEventListener('click', cerrarAuth);
     const cerrarRegister = document.getElementById('cerrarRegister');
-    cerrarRegister.addEventListener('click',cerrarAuth);
+    cerrarRegister.addEventListener('click', cerrarAuth);
 }
 
 // Escucha los eventos de los formularios de inicio de sesión y registro
@@ -134,7 +134,7 @@ function handleLogin(event) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.username === username && user.password === password);
 
-
+    debugger;
     if (user) {
         debugger;
         localStorage.setItem('activeUser', JSON.stringify(user));
@@ -198,7 +198,7 @@ function handleRegister(event) {
                 };
                 updateUserInLocalStorage(updatedUser, users, activeUser.username);
                 break;
-        }    
+        }
     } else {
         // Registro de un nuevo usuario
         const userExists = users.some(user => user.username === username);
@@ -294,6 +294,7 @@ function updateUserInLocalStorage(updatedUser, users, username) {
 }
 
 function cerrarAuth() {
+    debugger;
     const credencialesDialog = document.getElementById('credenciales');
     credencialesDialog.close(); // Cierra el diálogo
 }

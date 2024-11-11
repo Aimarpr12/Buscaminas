@@ -1,6 +1,7 @@
 body {
     background-image: url("../Img/fondo_pantalla.jpg");
-    background-size: cover; /* Asegura que el fondo cubra toda la pantalla */
+    background-size: cover;
+    /* Asegura que el fondo cubra toda la pantalla */
     background-position: center;
     background-repeat: no-repeat;
     min-height: 80vh;
@@ -8,6 +9,7 @@ body {
     margin: 0;
     margin-top: 150px;
 }
+
 button {
     padding: 5px 10px;
     font-size: 1em;
@@ -43,7 +45,8 @@ input {
 
 /* Título del juego */
 #title {
-    align-self: flex-start; /* Alinea el título a la izquierda */
+    align-self: flex-start;
+    /* Alinea el título a la izquierda */
     margin-left: 10px;
     font-size: 1.8em;
 }
@@ -55,6 +58,7 @@ input {
     justify-content: space-around;
     width: 100%;
 }
+
 /* Icono de hamburguesa (oculto en pantallas grandes) */
 #menu-icon {
     margin-top: 25px;
@@ -72,7 +76,8 @@ input {
     margin: 0;
     z-index: 1000;
     justify-content: center;
-    align-items: center; /* Alinea los elementos verticalmente */
+    align-items: center;
+    /* Alinea los elementos verticalmente */
 }
 
 .menu li a {
@@ -89,20 +94,24 @@ input {
 }
 
 .menu li a:hover:not(.active) {
-    background-color: var(--color-complementario-1); /* Color de fondo al hacer hover en enlaces inactivos */
+    background-color: var(--color-complementario-1);
+    /* Color de fondo al hacer hover en enlaces inactivos */
 }
 
 .disabled {
     opacity: 0.75;
     pointer-events: none;
-    cursor: not-allowed; 
+    cursor: not-allowed;
 }
+
 .container {
-    flex: 1; /* Crece para llenar el espacio disponible */
+    flex: 1;
+    /* Crece para llenar el espacio disponible */
     width: 80%;
     max-width: 600px;
     padding: 20px;
-    margin: 20px auto; /* Ajusta el margen según sea necesario */
+    margin: 20px auto;
+    /* Ajusta el margen según sea necesario */
     background-color: #f9f9f9;
     border: 2px solid var(--color-complementario-2);
     border-radius: 8px;
@@ -155,20 +164,7 @@ input {
     height: auto;
 }
 
-#header{
-    background-color: var(--color-complementario-2);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 120px;
-    width: 100%;
-    color: white;
-    padding: 10px;
-    z-index: 1000;
-}
-
-
-#footer{
+#footer {
     position: fixed;
     bottom: 0;
     margin-top: 25px;
@@ -233,7 +229,8 @@ input {
     #menu-icon {
         display: block;
         justify-content: center;
-        z-index: 2; /* Asegura que el icono esté siempre por encima */
+        z-index: 2;
+        /* Asegura que el icono esté siempre por encima */
         align-items: center;
     }
 
@@ -241,12 +238,15 @@ input {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0; /* Elimina cualquier margen adicional */
-        text-align: center; /* Asegura que el texto esté centrado */
-        width: 100%; /* Asegura que el título ocupe todo el ancho */
+        margin: 0;
+        /* Elimina cualquier margen adicional */
+        text-align: center;
+        /* Asegura que el texto esté centrado */
+        width: 100%;
+        /* Asegura que el título ocupe todo el ancho */
     }
 
-    #menu-icon i{
+    #menu-icon i {
         display: flex;
         align-items: center;
         justify-content: center
@@ -258,14 +258,15 @@ input {
     }
 
     /* Estructura del menú desplegable */
-    .mostrar{
+    .mostrar {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         background-color: var(--color-complementario-2);
         padding: 10px 0;
-        z-index: 1; /* Asegura que el menú esté detrás del icono */
+        z-index: 1;
+        /* Asegura que el menú esté detrás del icono */
     }
 
     .mostrar ul {
@@ -281,11 +282,12 @@ input {
         width: 100%;
         display: flex;
         justify-content: center;
-    }    
+    }
 
     .mostrar ul li a {
         display: block;
-        width: 80%; /* Ancho para centrar los enlaces */
+        width: 80%;
+        /* Ancho para centrar los enlaces */
         padding: 10px 0;
         text-align: center;
         background-color: var(--color-principal);
@@ -301,3 +303,19 @@ input {
     }
 }
 
+@media (max-height: 500px) {
+    #footer {
+        display: none;
+    }
+
+    #header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    #menu-container {
+        width: auto;
+    }
+
+}
